@@ -2,7 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>La Pizzeria</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1 "  >
+    <!-- Make this iOS compatible -->
+    <meta name="apple-mobile-web-app-capable" content="yes" >
+    <meta name="apple-mobile-web-app-title" content="La Pizzeria Resturant" >
+    <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri() ?>/apple-touch-icon.jpg">
+
+    <!-- Make this Android compatible -->
+    <meta name="theme-color" content="#a61206" >
+    <meta name="mobile-web-app-capable" content="yes" >
+    <meta name="application-name" content="La Pizzeria Resturant" >
+    <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri() ?>/image.png" sizes="192x192" >
+
     <?php wp_head();?>
 </head>
 <body <?php body_class(); ?>>
@@ -11,7 +23,11 @@
     <div class="container">
         <div class="logo">
             <a href="<?php echo esc_url( home_url('/') ) ?>">
-                <img src="<?php echo get_template_directory_uri()?>/img/logo.svg" class='logoimage'>
+                <?php 
+                    if (function_exists('the_custom_logo')) {
+                        the_custom_logo( );
+                    }
+                ?>
             </a>
         </div> <!--.logo-->
         <div class="header-information">
@@ -29,8 +45,8 @@
                 ?>
             </div> <!--.socials-->
             <div class="address">
-                <p>817 Bay Avenue Mountain View, CA 94043</p>
-                <p>Phone Number: +1-92-456-7890</p>
+                <p><?php echo esc_html( get_option( 'lapizzeria_location' ) ); ?></p>
+                <p>Phone Number: <?php echo esc_html( get_option( 'lapizzeria_phonenumber' ) ); ?></p>
             </div>
         </div> <!--.header-information-->
     </div> <!--.container-->

@@ -15,9 +15,9 @@ get_header(); ?>
             </div>        
         </div>
 
-    <div class="main-content container">
-        <main class="text-center content-text clear">
-            <?php the_content(); ?>
+    <div class="main-content container reservation">
+        <main class="content-text clear">
+            <?php get_template_part( 'templates/reservation', 'form' ); ?>
         </main>
     </div>        
 

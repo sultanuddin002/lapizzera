@@ -1,3 +1,24 @@
+var map;
+function initMap() {
+
+    var latLng = {
+        lat: parseFloat(options.latitude),
+        lng: parseFloat(options.longitude)
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: latLng,
+        zoom: parseInt(options.zoom)
+    });
+
+    var market = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: 'La Pizzeria'
+    });
+}
+
+
 $ = jQuery.noConflict();
 
 $(document).ready(function () {
@@ -25,6 +46,26 @@ $(document).ready(function () {
         jQuery('[data-fluidbox]').fluidbox();
     }
 
+
+    // Adapt Map to Height
+    var map = $('#map');
+    if (map.length > 0) {
+        if ($(document).width() >= breakpoint) {
+            displayMap(0);
+        } else {
+            displayMap(300);
+        }
+    }
+
+    $(window).resize(function () {
+        if ($(document).width() >= breakpoint) {
+            displayMap(0);
+        } else {
+            displayMap(300);
+        }
+    })
+
+
     // Adapt the height of the images to the div elements
     function boxAdjustment() {
         var images = $('.box-image');
@@ -38,3 +79,14 @@ $(document).ready(function () {
         }
     }
 });
+
+
+function displayMap(value) {
+    if (value == 0) {
+        var locationSection = $('.location-reservation');
+        var locationHeight = locationSection.height();
+        $('#map').css({ 'height': locationHeight });
+    } else {
+        $('#map').css({ 'height': value });
+    }
+}
